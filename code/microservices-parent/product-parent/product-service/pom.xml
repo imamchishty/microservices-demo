@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.demo.microservice</groupId>
+        <artifactId>product-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>product-service</artifactId>
+    <packaging>jar</packaging>
+    <name>product-service</name>
+    <description>Module contains business services which are exposed via the rest module.</description>
+
+    <dependencies>
+
+        <!-- Internal dependencies -->
+
+        <dependency>
+            <groupId>com.demo.microservice</groupId>
+            <artifactId>product-exception</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.demo.microservice</groupId>
+            <artifactId>product-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.demo.microservice</groupId>
+            <artifactId>product-domain</artifactId>
+        </dependency>
+
+        <!-- Shedhack dependencies -->
+
+        <dependency>
+            <groupId>com.shedhack.thread</groupId>
+            <artifactId>thread-context-handler</artifactId>
+        </dependency>
+
+        <!-- External dependencies -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.demo.microservice</groupId>
+        <artifactId>manufacturer-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>manufacturer-domain</artifactId>
+    <packaging>jar</packaging>
+    <name>manufacturer-domain</name>
+    <description>Domain - repo, entities etc</description>
+
+    <dependencies>
+
+        <!-- Internal dependencies -->
+
+        <dependency>
+            <groupId>com.demo.microservice</groupId>
+            <artifactId>manufacturer-exception</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.demo.microservice</groupId>
+            <artifactId>manufacturer-model</artifactId>
+        </dependency>
+
+        <!-- Shedhack dependencies -->
+
+        <dependency>
+            <groupId>com.shedhack.thread</groupId>
+            <artifactId>thread-context-handler</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

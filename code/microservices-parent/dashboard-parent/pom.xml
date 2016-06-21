@@ -1,0 +1,520 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.demo.microservice</groupId>
+    <artifactId>dashboard-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>dashboard-parent</name>
+    <description>dashboard-parent</description>
+
+    <parent>
+        <artifactId>microservices-parent</artifactId>
+        <groupId>com.demo.microservice</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>dashboard-rest</module>
+        <module>dashboard-exception</module>
+        <module>dashboard-model</module>
+        <module>dashboard-service</module>
+        <module>dashboard-domain</module>
+    </modules>
+
+    <!-- FIXME: Update with the correct settings -->
+    <scm>
+        <connection>scm:git:git@github.com:USERNAME/REPO.git</connection>
+        <developerConnection>scm:git:git@github.com:USERNAME/REPO.git</developerConnection>
+        <url>git@github.com:USERNAME/REPO.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- FIXME: Update with the correct settings -->
+    <ciManagement>
+        <url>ci-url</url>
+    </ciManagement>
+
+    <!-- FIXME: Update with the correct settings -->
+    <issueManagement>
+        <url>jira</url>
+    </issueManagement>
+
+    <!-- FIXME: Update with the correct settings -->
+    <inceptionYear>2016</inceptionYear>
+
+    <!-- FIXME: Update with the correct settings -->
+    <organization>
+        <name>NAME</name>
+        <url>URL</url>
+    </organization>
+
+    <!-- FIXME: Update with the correct settings -->
+    <developers>
+        <developer>
+            <id>ID</id>
+            <name>NAME</name>
+            <roles>
+                <role>Developer</role>
+                <role>Architect</role>
+            </roles>
+            <email>EMAIL</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+
+        <!-- JMeter properties (defaulted - can be override via command line args) -->
+        <host>localhost</host>
+        <port>8080</port>
+
+        <!-- CI settings -->
+        <ci.build>${BUILD_NUMBER}</ci.build>
+        <ci.url>${BUILD_URL}</ci.url>
+
+        <!-- Log4j version -->
+        <log4j2.version>2.5</log4j2.version>
+
+        <!-- Spring boost version -->
+        <built.using.spring.boost.version>1.4.1</built.using.spring.boost.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Manage local dependencies -->
+
+            <dependency>
+                <groupId>com.demo.microservice</groupId>
+                <artifactId>dashboard-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.demo.microservice</groupId>
+                <artifactId>dashboard-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.demo.microservice</groupId>
+                <artifactId>dashboard-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.demo.microservice</groupId>
+                <artifactId>dashboard-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.demo.microservice</groupId>
+                <artifactId>dashboard-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Shedhack dependencies -->
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-filter</artifactId>
+                <version>1.0.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-jpa</artifactId>
+                <version>1.0.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.exception</groupId>
+                <artifactId>exception-controller-spring</artifactId>
+                <version>1.0.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.exception</groupId>
+                <artifactId>exception-core</artifactId>
+                <version>1.0.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.thread</groupId>
+                <artifactId>thread-context-handler</artifactId>
+                <version>1.0.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.thread</groupId>
+                <artifactId>thread-context-aspect</artifactId>
+                <version>1.0.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.spring</groupId>
+                <artifactId>spring-actuator</artifactId>
+                <version>1.0.3</version>
+            </dependency>
+
+            <!-- Logging - version not via spring boot parent -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.19</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+
+            <!-- If you wish to host your maven site on github then enable this plugin.
+                    mvn site will deploy the site to your github page,
+                    e.g. http://USERNAME.github.io/REPOSITORY.
+
+                    This requires you to provide the following properties:
+                    <github.global.server>github</github.global.server>
+                           ::where github is defined as a server in your settings.xml::
+                    <url>https://github.com/USERNAME/REPOSITORY</url>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site</phase>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+            <!-- JUnit tests -->
+            <!-- exclude integration tests from normal build -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <configuration>
+                <excludes>
+                  <exclude>**/*IT.java</exclude>
+                  <exclude>**/*IntegrationTest.java</exclude>
+                  <exclude>**/*ST.java</exclude>
+                  <exclude>**/*SpecTest.java</exclude>
+                  <exclude>**/*SpecificationTest.java</exclude>
+                  <exclude>**/*Spec.java</exclude>
+                  <exclude>**/*Specification.java</exclude>
+                </excludes>
+              </configuration>
+            </plugin>
+
+            <!-- Integration/Specification Tests -->
+            <!-- mvn failsafe:integration-test -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>failsafe-integration-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>none</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/*IT.java</include>
+                        <include>**/*IntegrationTest.java</include>
+                        <include>**/*ST.java</include>
+                        <include>**/*SpecTest.java</include>
+                        <include>**/*SpecificationTest.java</include>
+                        <include>**/*Spec.java</include>
+                        <include>**/*Specification.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- JMeter tests -->
+            <!-- mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080 -->
+            <!-- Please note that this will run with mvn site, you should modify this accordingly -->
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>1.10.1</version>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <goal>-t</goal>
+
+                    <propertiesUser>
+                        <host>${host}</host>
+                        <port>${port}</port>
+                    </propertiesUser>
+
+                    <propertiesJMeter>
+                        <log_level.jmeter>DEBUG</log_level.jmeter>
+                    </propertiesJMeter>
+
+                    <jMeterProcessJVMSettings>
+                        <xms>1024</xms>
+                        <xmx>1024</xmx>
+                        <arguments>
+                            <argument>-Xprof</argument>
+                            <argument>-Xfuture</argument>
+                        </arguments>
+                    </jMeterProcessJVMSettings>
+
+                    <jmeterPlugins>
+                        <plugin>
+                            <groupId>kg.apc</groupId>
+                            <artifactId>jmeter-plugins</artifactId>
+                        </plugin>
+                    </jmeterPlugins>
+
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+
+            <!-- JavaDoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Manifest -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <!-- Manifest -->
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addClasspath>false</addClasspath>
+                            <classpathPrefix>lib</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Title>${project.name}</Specification-Title>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Maven site reports -->
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.12</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin>
+
+            <!-- Changes report (SVN)-->
+            <plugin>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+
+            <!-- Changes.xml plugin - manual release notes, see src/changes/changes.xml for an example -->
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.10</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+            <!-- SVN report -->
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <!-- To override the SCM settings use webAccessUrl/developerConnections in the configuration tag -->
+            </plugin>
+
+            <!-- Find bugs -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
+
+            <!-- PMD -->
+            <plugin>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+
+                <!-- To view the maven site, mvn site (-o if too slow), to deploy to a repo mvn site-deploy,
+                        to check all modules locally site:stage -->
+                <reportSets>
+                    <reportSet>
+                        <!-- https://maven.apache.org/plugins/maven-project-info-reports-plugin/ -->
+                        <!-- distribution-management, index, dependencies, help, issue-tracking,
+                            plugins, cim, license, dependency-management, mailing-list, project-team,
+                            dependency-convergence, scm, plugin-management, modules, summary -->
+                        <reports>
+                            <report>index</report>
+                            <report>summary</report>
+                            <report>cim</report>
+                            <report>dependencies</report>
+                            <report>dependency-convergence</report>
+                            <report>dependency-info</report>
+                            <report>dependency-management</report>
+                            <report>distribution-management</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>mailing-list</report>
+                            <report>project-team</report>
+                            <report>scm</report>
+                            <report>modules</report>
+                            <report>plugins</report>
+                            <report>help</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- When the app runs outside of a CI server then we don't have access
+            to certain properties, so we just give defaults -->
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>default-property-setter</name>
+                </property>
+            </activation>
+
+            <!-- default values, please adjust or use the spring Value default -->
+            <properties>
+                <ci.build>unknown</ci.build>
+                <ci.url>unknown</ci.url>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
