@@ -47,6 +47,16 @@ account.service.name: ${spring.application.name}
 spring:
   profiles: development
 
+product-domain:
+  hibernate.hbm2ddl.auto: none
+  hibernate.dialect: org.hibernate.dialect.H2Dialect
+  jdbc.driverClassName: org.h2.Driver
+  jdbc.url: jdbc:h2:mem:product;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  dbc.user: sa
+  jdbc.pass:
+
+spring.h2.console.enabled: true
+logging.level.org.hibernate.SQL: debug
 
 ---
 spring:

@@ -1,11 +1,11 @@
 package com.demo.product.rest;
 
+import com.demo.product.domain.config.EnableProductJpa;
 import com.demo.product.rest.constant.ApiConstants;
 import com.shedhack.exception.controller.spring.config.EnableExceptionController;
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
 import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
 import com.shedhack.thread.context.config.EnableThreadContextAspectWithLogging;
-import com.shedhack.trace.request.api.service.TraceRequestService;
 import com.shedhack.trace.request.filter.DefaultTraceRequestInterceptor;
 import com.shedhack.trace.request.filter.RequestTraceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,8 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -31,6 +33,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -45,6 +48,7 @@ import java.util.Arrays;
 @EnableFeignClients
 @EnableHystrix
 @EnableHystrixDashboard
+@EnableProductJpa
 public class Application extends WebMvcConfigurerAdapter {
 
     // --------------------
@@ -53,6 +57,9 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @Value("${spring.application.name}")
     private String appName;
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     private ActuatorTraceRequestInterceptor actuatorTraceRequestInterceptor;
@@ -70,6 +77,21 @@ public class Application extends WebMvcConfigurerAdapter {
 
         return filter;
     }
+
+    // -------------------------
+    // Database settings for JPA
+    // -------------------------
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("product-domain.jdbc.driverClassName"));
+        dataSource.setUrl(env.getProperty("product-domain.jdbc.url"));
+        dataSource.setUsername(env.getProperty("product-domain.jdbc.user"));
+        dataSource.setPassword(env.getProperty("product-domain.jdbc.pass"));
+        return dataSource;
+    }
+
 
     // ---------------------------------------
     // Swagger setup for the API documentation
