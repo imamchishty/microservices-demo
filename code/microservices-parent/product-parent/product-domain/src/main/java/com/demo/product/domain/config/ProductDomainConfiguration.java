@@ -45,7 +45,7 @@ public class ProductDomainConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager traceRequestTxManager() {
+    public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;

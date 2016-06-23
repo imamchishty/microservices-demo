@@ -15,6 +15,8 @@ public class ApiConstants {
 
     public static final String API_DOCS_ROOT = API_ROOT + "/docs";
 
+    public static final String API_PRODUCT = API_ROOT + "/product";
+
     // Management root URI
     public static final String API_MAN_ROOT ="/admin";
 
