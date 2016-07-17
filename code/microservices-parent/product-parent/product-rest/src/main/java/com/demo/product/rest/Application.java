@@ -90,13 +90,6 @@ public class Application extends WebMvcConfigurerAdapter {
         dataSource.setUsername(env.getProperty("product-domain.jdbc.user"));
         dataSource.setPassword(env.getProperty("product-domain.jdbc.pass"));
 
-        for (int i = 0; i < 100; i++) {
-
-            System.out.println("url >>>" + env.getProperty("product-domain.jdbc.url"));
-            System.out.println("user>>>" + env.getProperty("product-domain.jdbc.user"));
-            System.out.println("pass>>>" + env.getProperty("product-domain.jdbc.pass"));
-        }
-
         return dataSource;
     }
 

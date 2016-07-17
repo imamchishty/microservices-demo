@@ -38,6 +38,14 @@
 
     <Appenders>
 
+        <Console name="STDOUT" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%r [%p] %c{1}: %m%n"/>
+        </Console>
+
+        <Console name="STDERR" target="SYSTEM_ERR" follow="true">
+            <PatternLayout pattern="%r [%p] %c{1}: %m%n"/>
+        </Console>
+
         <!-- Errors within the application - mainly via com.shedhack.exception.controller.spring.ExceptionController -->
         <RollingFile name="${APPLICATION_NAME}-error"
                      fileName="${LOG_PATH}/${APPLICATION_NAME}-error.log"
@@ -121,36 +129,43 @@
 
         <Root level="error">
             <AppenderRef ref="${APPLICATION_NAME}"/>
+            <AppenderRef ref="STDERR"/>
         </Root>
 
         <!-- Application logs -->
         <Logger name="${APPLICATION_PACKAGE_ROOT}" level="${APPLICATION_LOG_LEVEL}" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
         <!-- Exception controller, requires error level -->
         <Logger name="com.shedhack.exception.controller" level="error" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-error"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
         <!-- Thread Context Aspect Audit Trail log -->
         <Logger name="com.shedhack.thread.context.handler" level="info" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-audit"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
         <!-- Trace Request logs via request filter, requires INFO level -->
         <Logger name="com.shedhack.trace.request.filter" level="info" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-trace-request"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
         <!-- Dependencies/external third-party logs -->
 
         <Logger name="com.netflix" level="${THIRD_PARTY_LOG_LEVEL}" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-third-party"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
         <Logger name="org.springframework" level="${THIRD_PARTY_LOG_LEVEL}" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-third-party"/>
+            <AppenderRef ref="STDOUT"/>
         </Logger>
 
     </Loggers>
