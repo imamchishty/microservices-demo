@@ -1,11 +1,15 @@
 package com.demo.product.domain.repository;
 
 import com.demo.product.domain.Application;
+import com.demo.product.domain.entity.Product;
+import com.demo.product.domain.entity.ProductType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +29,32 @@ public class ProductRepositoryIntegrationTest {
 
     @Test
     public void should_find_by_manufacturer() {
-        assertEquals(1, repository.findByManufacturer("BMW").size());
+
+        List<Product> products = repository.findByManufacturer("J&L");
+        assertEquals(1, products.size());
+        checkProduct(products.get(0));
+    }
+
+    @Test
+    public void should_find_by_short_code() {
+        checkProduct(repository.findByShortCode("GR001"));
+    }
+
+
+    @Test
+    public void should_find_by_name() {
+        List<Product> products = repository.findByName("gold-ring-1234");
+        assertEquals(1, products.size());
+        checkProduct(products.get(0));
+    }
+
+    private void checkProduct(Product product) {
+        assertEquals("J&L", product.getManufacturer());
+        assertEquals("GR001", product.getShortCode());
+        assertEquals("Gold ring", product.getDescription());
+        assertEquals("gold-ring-1234", product.getName());
+        assertEquals(56995.00, product.getWeight(), 0);
+        assertEquals(ProductType.GOLD, product.getType());
     }
 
 }

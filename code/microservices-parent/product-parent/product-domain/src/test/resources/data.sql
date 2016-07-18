@@ -1,1 +1,1 @@
-insert into product (description, manufacturer, name, price) values ('Sports Coupe', 'BMW', 'M3', 56995.00);
+insert into product (short_code, description, manufacturer, name, weight, type, price_markup) values ('GR001', 'Gold ring', 'J&L', 'gold-ring-1234', 56995.00, 'GOLD', 1.15);

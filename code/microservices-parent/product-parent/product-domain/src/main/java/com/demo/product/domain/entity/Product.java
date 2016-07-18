@@ -20,8 +20,17 @@ public class Product {
 
     private String name;
 
+    @Column(name = "short_code", unique = true)
+    private String shortCode;
+
     @Column(scale = 2)
-    private double price;
+    private double weight;
+
+    @Column(scale = 2, name = "price_markup")
+    private double priceMarkUp;
+
+    @Enumerated(EnumType.STRING)
+    private ProductType type;
 
     public long getId() {
         return id;
@@ -51,11 +60,35 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
+    }
+
+    public String getShortCode() {
+        return shortCode;
+    }
+
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
+    }
+
+    public double getPriceMarkUp() {
+        return priceMarkUp;
+    }
+
+    public void setPriceMarkUp(double priceMarkUp) {
+        this.priceMarkUp = priceMarkUp;
     }
 }

@@ -17,7 +17,7 @@
     <properties>
 
         <!-- Docker properties -->
-        <docker.image.name>${project.groupId}/${project.artifactId}:${project.version}</docker.image.name>
+        <docker.image.name>imamchishty/${project.artifactId}:${project.version}</docker.image.name>
         <docker.from>java:8u40</docker.from>
         <docker.container.port>8080</docker.container.port>
         <docker.host.port>8080</docker.host.port>
@@ -307,8 +307,11 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.15.5</version>
+                <version>0.15.9</version>
                 <configuration>
+
+                    <!-- If you have a different reg set it here
+                    <registry>hub.docker.com</registry> -->
                     <verbose>true</verbose>
                     <logDate>default</logDate>
                     <autoPull>true</autoPull>

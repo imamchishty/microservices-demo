@@ -17,7 +17,7 @@
     <properties>
 
         <!-- Docker properties -->
-        <docker.image.name>${project.groupId}/${project.artifactId}:${project.version}</docker.image.name>
+        <docker.image.name>imamchishty/${project.artifactId}:${project.version}</docker.image.name>
         <docker.from>java:8u40</docker.from>
         <docker.container.port>8080</docker.container.port>
         <docker.host.port>8080</docker.host.port>
