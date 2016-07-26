@@ -5,6 +5,9 @@ import com.demo.product.exception.GlobalBusinessCodes;
 import com.demo.product.rest.constant.ApiConstants;
 import com.shedhack.exception.core.BusinessException;
 import com.shedhack.thread.context.annotation.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,12 +28,21 @@ public class PingController {
     @Value("${spring.application.name}")
     private String appName;
 
+    private static final Logger logger = LoggerFactory.getLogger(PingController.class);
+
+
     /**
      * Used to provide tools a HTTP 200 OK when service is running.
      */
     @ThreadContext // writes to the xxx-audit.log
     @RequestMapping(path = ApiConstants.API_PING, method = RequestMethod.GET)
     public ResponseEntity<String> ping(){
+
+
+        logger.info(appName + " is running.....");
+
+
+
         return new ResponseEntity<>(appName + " is running.....", HttpStatus.OK);
     }
 
