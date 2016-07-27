@@ -2,9 +2,11 @@ package com.demo.product.rest;
 
 import com.demo.product.domain.config.EnableProductJpa;
 import com.demo.product.rest.constant.ApiConstants;
+import com.google.gson.Gson;
 import com.shedhack.exception.controller.spring.config.EnableExceptionController;
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
 import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
+import com.shedhack.thread.context.config.EnableThreadContextAspect;
 import com.shedhack.thread.context.config.EnableThreadContextAspectWithLogging;
 import com.shedhack.trace.request.filter.DefaultTraceRequestInterceptor;
 import com.shedhack.trace.request.filter.RequestTraceFilter;
@@ -39,7 +41,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @EnableSwagger2
 @EnableExceptionController
-@EnableThreadContextAspectWithLogging
+@EnableThreadContextAspect
 @EnableActuatorsAndInterceptors
 @PropertySources(value = {
         @PropertySource(value = "classpath:/git-build.properties")
@@ -72,11 +74,20 @@ public class Application extends WebMvcConfigurerAdapter {
     public FilterRegistrationBean requestIdFilterRegistrationBean() {
         FilterRegistrationBean filter = new FilterRegistrationBean();
         filter.setFilter(new RequestTraceFilter(appName,
-                Arrays.asList(new DefaultTraceRequestInterceptor(), actuatorTraceRequestInterceptor)));
+                Arrays.asList(new DefaultTraceRequestInterceptor(gson()), actuatorTraceRequestInterceptor)));
         filter.addUrlPatterns(ApiConstants.API_ROOT + "/*");
 
         return filter;
     }
+
+    // -------------------------
+    // GSON - for json
+    // -------------------------
+    @Bean
+    public Gson gson() {
+        return new Gson();
+    }
+
 
     // -------------------------
     // Database settings for JPA
